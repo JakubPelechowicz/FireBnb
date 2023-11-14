@@ -45,13 +45,13 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'url' => env('DATABASE_URL_MYSQL'),
+            'host' => env('DB_HOST_MYSQL', '127.0.0.1'),
+            'port' => env('DB_PORT_MYSQL', '3306'),
+            'database' => env('DB_DATABASE_MYSQL', 'forge'),
+            'username' => env('DB_USERNAME_MYSQL', 'forge'),
+            'password' => env('DB_PASSWORD_MYSQL', ''),
+            'unix_socket' => env('DB_SOCKET_MYSQL', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -93,6 +93,15 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        // CHATGPT - mongodb+srv://
+        // 'dsn' => env('DB_URI', 'mongodb+srv://firebnb:123456@mongodb/firebnb?retryWrites=true&w=majority'),
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => env('DB_URI', 'mongodb://firebnb:123456@mongodb:27017/firebnb'),
+            'database' => 'firebnb',
+            'host' => env('DB_HOST_MONGO', '127.0.0.1')
+        ],
+
     ],
 
     /*
@@ -125,7 +134,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

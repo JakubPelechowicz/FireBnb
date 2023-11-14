@@ -21,7 +21,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: '123456'
       MYSQL_DATABASE: firebnb
-      MYSQL_USER: firebnb 
+      MYSQL_USER: firebnb
       MYSQL_PASSWORD: '123456'
     ports:
       - '3306:3306'
@@ -34,13 +34,27 @@ services:
       - type: bind
         source: ./MariaDB/migrations
         target: /migrations
-    
+
+#  mongodb:
+#    image: docker.io/bitnami/mongodb:7.0
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - 'mongodb_data:/bitnami/mongodb'
+#    environment:
+#      MONGODB_ROOT_PASSWORD: 123456
+#      MONGODB_USERNAME: firebnb
+#      MONGODB_PASSWORD: 123456
+#      MONGODB_DATABASE: firebnb
+
   mongodb:
-    image: docker.io/bitnami/mongodb:7.0
+    image: mongo
+    restart: always
     ports:
       - "27017:27017"
-    volumes:
-      - 'mongodb_data:/bitnami/mongodb'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
 
   laravel.test:
     build:
