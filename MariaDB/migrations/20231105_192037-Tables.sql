@@ -14,7 +14,7 @@ CREATE TABLE reservations (
   start_date datetime NOT NULL,
   end_date datetime NOT NULL,
   user_id integer NOT NULL,
-  bnb_id integer NOT NULL,
+  bnb_id varchar(24) NOT NULL,
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL
 );

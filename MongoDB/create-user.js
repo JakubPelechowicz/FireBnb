@@ -1,0 +1,1 @@
+db.createUser({ user: "firebnb", pwd: "123456", roles: [ {role: "readWrite", db: "firebnb"} ] })

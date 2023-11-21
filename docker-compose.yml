@@ -1,20 +1,6 @@
 version: '3.8'
 
 services:
-  # mysql:
-  #   image: docker.io/bitnami/mysql:8.2
-  #   ports:
-  #     - '3306:3306'
-  #   volumes:
-  #     - 'mysql_data:/bitnami/mysql/data'
-  #     - './MariaDB/migrations:/migrations'
-  #   environment:
-  #     - ALLOW_EMPTY_PASSWORD=yes
-  #   healthcheck:
-  #     test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
-  #     interval: 15s
-  #     timeout: 5s
-  #     retries: 6
   mysql:
     restart: always
     image: mariadb:10.9-jammy
@@ -33,19 +19,7 @@ services:
           nocopy: true
       - type: bind
         source: ./MariaDB/migrations
-        target: /migrations
-
-#  mongodb:
-#    image: docker.io/bitnami/mongodb:7.0
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - 'mongodb_data:/bitnami/mongodb'
-#    environment:
-#      MONGODB_ROOT_PASSWORD: 123456
-#      MONGODB_USERNAME: firebnb
-#      MONGODB_PASSWORD: 123456
-#      MONGODB_DATABASE: firebnb
+        target: /docker-entrypoint-initdb.d
 
   mongodb:
     image: mongo
@@ -55,11 +29,20 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: firebnb
+    volumes:
+      - type: volume
+        source: mongodb_data
+        target: /data/db
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./MongoDB
+        target: /docker-entrypoint-initdb.d
 
   laravel.test:
     build:
-      context: ./Laravel/vendor/laravel/sail/runtimes/8.2
-      dockerfile: Dockerfile
+      context: ./Laravel/docker
       args:
         WWWGROUP: '${WWWGROUP}'
     image: sail-8.2/app
