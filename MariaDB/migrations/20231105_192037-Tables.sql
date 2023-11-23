@@ -1,7 +1,7 @@
 USE firebnb;
 
 CREATE TABLE users (
-  id integer PRIMARY KEY,
+  id integer PRIMARY KEY AUTO_INCREMENT,
   full_name varchar(255) NOT NULL,
   password varchar(127) NOT NULL,
   email varchar(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE reservations (
-  id integer PRIMARY KEY,
+  id integer PRIMARY KEY AUTO_INCREMENT,
   start_date datetime NOT NULL,
   end_date datetime NOT NULL,
   user_id integer NOT NULL,

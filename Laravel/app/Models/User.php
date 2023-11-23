@@ -14,18 +14,20 @@ class User extends Authenticatable implements JWTSubject
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $connection = 'mysql';
+
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
         'full_name',
         'email',
         'password',
-        'created_at',
-        'updated_at'
     ];
 
     /**
@@ -47,8 +49,6 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'id' => 'integer',
-        'updated_at' => 'datetime',
-        'created_at' => 'datetime'
     ];
 
     public function reservations(): HasMany

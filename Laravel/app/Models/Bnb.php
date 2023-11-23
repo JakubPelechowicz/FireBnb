@@ -13,12 +13,12 @@ class Bnb extends Model
 
     protected $connection = 'mongodb';
     protected $collection = 'bnb';
+    protected $primaryKey = '_id';
+    public $incrementing = true;
+    public $timestamps = true;
 
     protected $fillable = [
-        '_id',
         'user_id',
-        'created_at',
-        'updated_at',
         'space',
         'address',
         'cost'
