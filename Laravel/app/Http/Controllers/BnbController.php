@@ -36,9 +36,9 @@ class BnbController extends Controller
         if($request->has('address_like'))
             $query->where('address', 'ilike','%' . $request->address_like . '%');
         if($request->has('max_space'))
-            $query->where('space', '>=',$request->max_space);
+            $query->where('space', '<=',$request->max_space);
         if($request->has('min_space'))
-            $query->where('space', '<=',$request->min_space);
+            $query->where('space', '>=',$request->min_space);
 
         $bnbs= $query->get();
         return response()->json($bnbs,200);
