@@ -89,12 +89,8 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
-            // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
-        // CHATGPT - mongodb+srv://
-        // 'dsn' => env('DB_URI', 'mongodb+srv://firebnb:123456@mongodb/firebnb?retryWrites=true&w=majority'),
         'mongodb' => [
             'driver' => 'mongodb',
             'dsn' => env('DB_URI', 'mongodb://firebnb:123456@mongodb:27017/firebnb'),

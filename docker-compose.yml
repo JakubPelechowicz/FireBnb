@@ -40,7 +40,7 @@ services:
         source: ./MongoDB
         target: /docker-entrypoint-initdb.d
 
-  laravel.test:
+  laravel:
     build:
       context: ./Laravel/docker
       args:
@@ -62,6 +62,16 @@ services:
     depends_on:
       - mysql
       - mongodb
+
+  express:
+    build:
+      context: ./Express
+    image: node:slim
+    ports:
+      - '5000:5000'
+    depends_on:
+      - mongodb
+      - mysql
 
 volumes:
   mysql_data:
