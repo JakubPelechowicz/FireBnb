@@ -10,8 +10,8 @@ async function hash(string) {
         });
 }
 
-function verifyHash(string, hash) {
-    return bcrypt.compare(string, hash);
+async function verifyHash(string, hash) {
+    return await bcrypt.compare(string, hash);
 }
 
 module.exports = { hash, verifyHash };
