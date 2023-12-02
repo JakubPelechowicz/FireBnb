@@ -1,12 +1,12 @@
 const express = require("express");
 const {validationResult} = require("express-validator");
 const router = express.Router();
-const {userCreateValidation} = require("../middleware/userCreateValidator");
-const User = require("../models/user");
+const {userCreateValidation} = require("../middleware/validator/userCreateValidator");
+const UserRoutes = require("../models/user");
 const hashing = require("../utils/hashing");
-const authenticateToken = require("../middleware/jwt");
-const {userUpdateValidation} = require("../middleware/userUpdateValidator");
-const {UserApiEntity} = require("../models/UserApiEntity");
+const authenticateToken = require("../middleware/jwtMiddleware");
+const {userUpdateValidation} = require("../middleware/validator/userUpdateValidator");
+const {UserApiEntity} = require("../api-entity/UserApiEntity");
 
 
 router.post(
@@ -20,7 +20,7 @@ router.post(
 
         const {full_name, email, password} = req.body;
 
-        var user = await User.create({
+        let user = await UserRoutes.create({
             fullName: full_name,
             password: await hashing.hash(password),
             email: email,
@@ -29,13 +29,12 @@ router.post(
         });
 
         user = new UserApiEntity(user);
-        res.status(200).json({message: "User created successfully",user});
+        res.status(200).json({message: "UserRoutes created successfully", user});
     }
 );
 router.put("/update", [authenticateToken, userUpdateValidation], async (req, res) => {
-    let user = await User.findOne({email:req.user.email});
+    let user = await UserRoutes.findOne({email: req.user.email});
 
-    console.log(user);
     const {email, full_name, password} = req.body;
     if (email !== undefined) {
         user.email = email;
@@ -50,13 +49,14 @@ router.put("/update", [authenticateToken, userUpdateValidation], async (req, res
     }
     await user.save();
     user = new UserApiEntity(user);
-    res.status(200).json({ message: 'User updated successfully', user });
+    res.status(200).json({message: 'UserRoutes updated successfully', user});
 })
 
-router.delete("/delete",[authenticateToken],async (req,res)=>{
-    let user = await User.findOne({email:req.user.email});
+router.delete("/delete", [authenticateToken], async (req, res) => {
+    let user = await UserRoutes.findOne({email: req.user.email});
     await user.destroy();
     user = new UserApiEntity(user);
-    res.status(200).json({ message: 'User deleted successfully',user });
-})
+    res.status(200).json({message: 'UserRoutes deleted successfully', user});
+});
+
 module.exports = router;

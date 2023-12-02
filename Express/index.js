@@ -11,11 +11,12 @@ env.config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const authRouter = require('./routes/auth');
-const userRouter = require('./routes/user');
-const bnbRouter = require('./routes/bnb');
+const authRouter = require('./routes/authRoutes');
+const userRouter = require('./routes/userRoutes');
+const bnbRouter = require('./routes/bnbRoutes');
+const reservationRouter = require('./routes/reservationRoutes');
 const {validationResult} = require("express-validator");
-const {userCreateValidation} = require("./middleware/userCreateValidator");
+const {userCreateValidation} = require("./middleware/validator/userCreateValidator");
 
 //-----------------------------------------------
 //    MongoDB connection
@@ -40,6 +41,15 @@ mongoConnection.once('open', () => {
 //-----------------------------------------------
 //    App Startup
 //-----------------------------------------------
+
+process
+    .on('unhandledRejection', (reason, p) => {
+        console.error(reason, 'Unhandled Rejection at Promise', p);
+    })
+    .on('uncaughtException', err => {
+        console.error(err, 'Uncaught Exception thrown');
+        process.exit(1);
+    });
 
 const app = express();
 
@@ -67,5 +77,6 @@ app.post(
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/bnb', bnbRouter);
+app.use('/api/reservation', reservationRouter);
 
 app.listen(5000, () => console.log(`Server is running at port: 5000`));
