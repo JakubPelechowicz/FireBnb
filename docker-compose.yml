@@ -73,6 +73,19 @@ services:
       - mongodb
       - mysql
 
+  django:
+    build: ./Django/app
+    command: gunicorn firebnb.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./Django/app/:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./Django/app/.env
+    depends_on:
+      - mysql
+      - mongodb
+
 volumes:
   mysql_data:
     driver: local
