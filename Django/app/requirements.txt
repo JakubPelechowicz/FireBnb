@@ -1,2 +1,12 @@
 Django==4.2.8
 gunicorn==21.2.0
+pymongo
+dnspython
+mongoengine
+djongo
+mysqlclient==2.1.1
+pytz
+django-utils-six
+djangorestframework
+bcrypt
+PyJWT
