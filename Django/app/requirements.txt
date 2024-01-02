@@ -10,3 +10,4 @@ django-utils-six
 djangorestframework
 bcrypt
 PyJWT
+django-admin-logs
