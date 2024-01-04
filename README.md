@@ -19,11 +19,19 @@ docker run --rm \
 2. Copy .env.example into .env
 3. Generate app key 
 ```bash 
-docker exec -it firebnb-laravel php artisan key:generate
+docker exec -it firebnb-laravel-1 php artisan key:generate
 ```
 4. Generate JWT secret
 ```bash
-docker exec -it firebnb-laravel php artisan jwt:secret
+docker exec -it firebnb-laravel-1 php artisan jwt:secret
 ```
 5. Your app should be running at `localhost:80` 
 
+
+## Express.js
+
+1. Copy .env.example into .env
+
+## Django 
+
+1. Copy .env.example into .env

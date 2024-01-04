@@ -49,7 +49,7 @@ router.put("/update", [authenticateToken, userUpdateValidation], async (req, res
     }
     await user.save();
     user = new UserApiEntity(user);
-    res.status(200).json({message: 'UserRoutes updated successfully', user});
+    res.status(200).json({message: 'User updated successfully', user});
 })
 
 router.delete("/delete", [authenticateToken], async (req, res) => {
