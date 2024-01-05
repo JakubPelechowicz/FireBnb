@@ -16,17 +16,25 @@ docker run --rm \
     laravelsail/php82-composer:latest \
     composer install --ignore-platform-reqs
 ```
-2. Copy .env.example into .env
-3. Generate app key 
+2. start container
+``` bash
+docker compose up laravel
+```
+3. Copy .env.example into .env
+```bash
+cd ..
+```
+```bash
+cp .env.example .env
+```
+4. Generate app key 
 ```bash 
 docker exec -it firebnb-laravel-1 php artisan key:generate
 ```
-4. Generate JWT secret
+5. Generate JWT secret
 ```bash
 docker exec -it firebnb-laravel-1 php artisan jwt:secret
 ```
-5. Your app should be running at `localhost:80` 
-
 
 ## Express.js
 
@@ -35,3 +43,15 @@ docker exec -it firebnb-laravel-1 php artisan jwt:secret
 ## Django 
 
 1. Copy .env.example into .env
+
+# Starting app
+
+each app can be run using:
+```bash
+docker compose up app_name
+```
+
+you can start all apps at once using:
+```bash
+docker compose up
+```
